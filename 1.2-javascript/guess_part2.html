@@ -47,8 +47,7 @@
                         colorChoices.join(", ") + "\n\n" +
                         "What color am I thinking of?");
                 numGuesses++;
-            } while (!checkGuess(guess, answer, numGuesses));
-
+            } while (guess != null && !checkGuess(guess, answer, numGuesses));
         }
     </script>
 </head>
