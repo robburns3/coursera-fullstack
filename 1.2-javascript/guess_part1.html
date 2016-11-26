@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta "charset"="UTF-8">
+    <meta name="title" content="Guess the color"/>
+    <meta name="author" content="Rob Burns"/>
+    <script>
+        var colorChoices = ["aqua", "azure", "khaki", "linen", "olive",
+                            "peru", "salmon", "thistle", "tomato", "wheat"];
+
+        function doGame() {
+            var numChoices = colorChoices.length;
+            var answerIndex = Math.floor(Math.random() * numChoices);
+            var answer = colorChoices[answerIndex];
+            alert("Shhh... my color is: " + answer);
+
+            var numGuesses = 0;
+            var correct = false;
+            do {
+                var guess = prompt("I am thinking of one of these colors:\n\n" +
+                        colorChoices.join(", ") + "\n\n" +
+                        "What color am I thinking of?");
+                numGuesses++;
+            } while (guess != answer);
+        }
+    </script>
+</head>
+<body onload="doGame();">
+</body>
+</html>

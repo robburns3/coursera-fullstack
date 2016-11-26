@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta "charset"="UTF-8">
+    <meta name="title" content="Guess the color"/>
+    <meta name="author" content="Rob Burns"/>
+    <script>
+        var colorChoices = ["aqua", "azure", "khaki", "linen", "olive",
+                            "peru", "salmon", "thistle", "tomato", "wheat"];
+
+        function checkGuess(guess, answer, numGuesses) {
+            // Check user's guess
+            var correct = false;
+            var guessIndex = colorChoices.indexOf(guess);
+            if (guessIndex == -1) {
+                alert("I don't recognize your color.\n\nPlease try again.");
+            } else if (guess > answer) {
+                alert("Sorry, your guess is incorrect.\n\n" +
+                        "Hint: Your guess is alphabetically higher than mine.\n\n" +
+                        "Please try again.");
+            } else if (guess < answer) {
+                alert("Sorry, your guess is incorrect.\n\n" +
+                        "Hint: Your guess is alphabetically lower than mine.\n\n" +
+                        "Please try again.");
+            } else {
+                correct = true;
+                document.body.style.backgroundColor = answer;
+
+                // Winner!  Set the background
+                alert("Congratulations!  You guessed the color!\n\n" +
+                        "It took you " + numGuesses + " guesses to finish the game.\n\n" +
+                        "Please enjoy every pixel of this fabulous color.");
+            }
+            return correct;
+        }
+
+        function doGame() {
+            var numChoices = colorChoices.length;
+            var answerIndex = Math.floor(Math.random() * numChoices);
+            var answer = colorChoices[answerIndex];
+            alert("Shhh... my color is: " + answer);
+
+            var numGuesses = 0;
+            var correct = false;
+            do {
+                var guess = prompt("I am thinking of one of these colors:\n\n" +
+                        colorChoices.join(", ") + "\n\n" +
+                        "What color am I thinking of?");
+                numGuesses++;
+            } while (!checkGuess(guess, answer, numGuesses));
+
+        }
+    </script>
+</head>
+<body onload="doGame();">
+</body>
+</html>
