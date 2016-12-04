@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta "charset"="UTF-8">
+    <meta name="author" content="Rob Burns"/>
+    <title>Find Freddie | Timed</title>
+    <style>
+        img {
+            position:absolute;
+        }
+        div {
+            position:absolute;
+            width: 500px;
+            height: 500px
+        }
+        #rightSide {
+            left: 500px;
+            border-left: 1px solid black;
+            border-right: 1px solid black
+        }
+    </style>
+</head>
+<body onload="generateFaces();">
+    <h2>Find Freddie</h2>
+    <p>Click on the extra smiling face on the left.  You have <strong><span id="secs"></span></strong> seconds.</p>
+    <div id="leftSide"></div>
+    <div id="rightSide"></div>
+</body>
+<script>
+    var level = 1;
+    var timeout = setTimeout(checkGameOver, 1000);
+    var timeLeft = 15;
+    var numberOfFaces = 3;
+    var theLeftSide = document.getElementById("leftSide");
+    var theRightSide = document.getElementById("rightSide");
+    var theBody = document.getElementsByTagName("body")[0];
+    var secsText = document.createTextNode("15");
+
+    document.getElementById("secs").appendChild(secsText);
+
+    function randNumString(max) {
+        return String(Math.floor(Math.random() * max+1));
+    }
+
+    function clearFaces() {
+        var sides = [theLeftSide, theRightSide];
+        for (side of sides) {
+            while (side.childNodes.length > 0)
+                side.removeChild(side.lastChild);
+        }
+    }
+
+    function checkGameOver() {
+        clearTimeout(timeout);
+
+        timeLeft--;
+        secsText.nodeValue = String(timeLeft);
+        if (timeLeft == 0)
+            gameOver();
+        else
+            timeout = setTimeout(checkGameOver, 1000);
+    }
+
+    function generateFaces() {
+        // Reset the timer
+        timeout = setTimeout(checkGameOver, 1000);
+        timeLeft = 15;
+
+        // Generate left side
+        for (var i=0; i<numberOfFaces; i++) {
+            var image = document.createElement("img");
+            image.src = "smile.png";
+            image.style.top = randNumString(400) + "px";
+            image.style.left = randNumString(400) + "px";
+            theLeftSide.appendChild(image);
+        }
+
+        // Clone left side onto right side and remove last face
+        var leftCopy = theLeftSide.cloneNode(true);
+        leftCopy.removeChild(leftCopy.lastChild);
+
+        // Insert copies onto right side
+        while (leftCopy.childNodes.length > 0) {
+            var nextNode = leftCopy.firstChild;
+            leftCopy.removeChild(nextNode);
+            theRightSide.appendChild(nextNode);
+        }
+
+        // Attach a handler for finding the extra image
+        theLeftSide.lastChild.onclick = function nextLevel(event) {
+            event.stopPropagation();
+            clearFaces();
+            level += 1;
+            numberOfFaces += 3;
+            generateFaces();
+        }
+
+        // Attach a handler for missing the extra image
+        theBody.onclick = gameOver;
+    }
+
+    function gameOver(event) {
+        clearTimeout(timeout);
+
+        theBody.onclick = null;
+        theLeftSide.lastChild.onclick = null;
+
+        var message = "Game over!";
+        if (level > 1)
+            message += "  You made it to Level " + level + ".";
+        message += "\n\nWould you like to play again?";
+        var playAgain = confirm(message);
+        if (playAgain)
+            location.reload(false);
+    }
+</script>
+</html>
