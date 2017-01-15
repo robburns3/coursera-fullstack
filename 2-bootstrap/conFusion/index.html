@@ -79,16 +79,16 @@
                     <!-- Sign-in form -->
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <form class="navbar-form " role="search">
+                        <form href="#" class="navbar-form " role="search">
                             <!-- Overrides default text color style for white text-->
                             <div class="form-group" style="color: white;">
-                                <input type="email" class="form-control" placeholder="Email"
+                                <input required type="email" class="form-control" placeholder="Email"
                                     name="email"></input>
-                                <input type="password" class="form-control" placeholder="Password"
+                                <input required type="password" class="form-control" placeholder="Password"
                                     name="password"></input>
                                 <input type="checkbox" class="form-control"
                                     name="rememberMe"> Remember Me</input>
-                                <input type="submit" class="btn btn-primary" value="Sign In"></input>
+                                <button type="submit" class="btn btn-primary">Sign In</button>
                             </div>
                         </form>
                     </li>
@@ -160,7 +160,7 @@
                         <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person</p>
                         <p><a class="btn btn-primary btn-xs" href="#">More &raquo;</a></p>
                     </div>
-                    <div class="media-left media-middle">
+                    <div class="media-right media-middle">
                         <a href="#">
                         <img class="media-object img-thumbnail"
                          src="img/buffet.png" alt="Buffet">
@@ -168,13 +168,6 @@
                     </div>
                 </div>
             </div>
-
-
-            </div>
-
-
-
-
         </div>
 
         <div class="row row-content">
@@ -211,7 +204,7 @@
                 <h3 align=center>Reserve a Table</h3>
             </div>
             <div class="col-xs-12 col-sm-9">
-                <form>
+                <form href="#">
                     <div class="row form-group">
                         <div class="col-xs-12 col-sm-2">
                             <label class="text-right pull-right" for="numberOfGuests">Number of Guests</label>
@@ -257,7 +250,7 @@
                     <div class="row form-group">
                         <div class="alert alert-warning alert-dismissible" role="alert">
                             <button class="close" data-dismiss="alert" <span aria-hidden="true">&times;</span></button>
-                            <p><strong>Warning</strong>: Please <strong>call</strong> us for more than six guests.</p>
+                            <p><strong>Warning</strong>: Please <a href="#phone">Call</a> us to reserve for more than six guests.</p>
                         </div>
                     </div>
                 </form>
@@ -283,7 +276,7 @@
 		              121, Clear Water Bay Road<br>
 		              Clear Water Bay, Kowloon<br>
 		              HONG KONG<br>
-		              <i class="fa fa-phone"></i>: +852 1234 5678<br>
+		              <i class="fa fa-phone" id="phone"></i>: +852 1234 5678<br>
 		              <i class="fa fa-fax"></i>: +852 8765 4321<br>
 		              <i class="fa fa-envelope"></i>: <a href="mailto:confusion@food.net">confusion@food.net</a>
 		           </address>
